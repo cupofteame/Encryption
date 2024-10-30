@@ -7,7 +7,10 @@
 #include <QLabel>
 #include <QFileDialog>
 #include <QMessageBox>
-#include <QTabWidget>
+#include <QProgressBar>
+#include <QCryptographicHash>
+#include <QRandomGenerator>
+#include <QComboBox>
 
 class EncryptionWindow : public QMainWindow {
 Q_OBJECT
@@ -40,11 +43,26 @@ private:
     QPushButton *decryptOutputBrowseButton;
     QPushButton *decryptButton;
 
+    // Common widgets
+    QProgressBar *progressBar;
+    QComboBox *encryptionStrength;
+
+    // Helper functions
     void setupUI();
     void setupEncryptionTab(QWidget *tab);
     void setupDecryptionTab(QWidget *tab);
     void processFile(bool encrypting, const QString &key, const QString &inputFile, 
                     const QString &outputDir);
+    void secureDelete(const QString &filePath);
+    QString calculateFileHash(const QString &filePath);
+    void createBackup(const QString &filePath);
+    void updateProgress(int value);
+
+    enum class EncryptionLevel {
+        Basic_XOR,
+        AES_128,
+        AES_256
+    };
 };
 
 #endif //ENCRYPTION_ENCRYPTIONWINDOW_H 
