@@ -57,12 +57,6 @@ private:
     QString calculateFileHash(const QString &filePath);
     void createBackup(const QString &filePath);
     void updateProgress(int value);
-
-    enum class EncryptionLevel {
-        Basic_XOR,
-        AES_128,
-        AES_256
-    };
 };
 
 #endif //ENCRYPTION_ENCRYPTIONWINDOW_H 
